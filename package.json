@@ -10,6 +10,13 @@
   "scripts": {
     "test": "node --experimental-modules test/EventEmitter3_Test.mjs"
   },
+   "keywords": [
+    "node.js",
+    "event",
+    "emitter",
+    "3",
+    "mocha"
+  ],
   "files": [
     "EventEmitter3.js",
     "History.md",
