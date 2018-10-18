@@ -12,7 +12,9 @@
   },
    "keywords": [
     "node.js",
-    "event emitter 3",
+    "event",
+    "emitter",
+    "3",
     "mocha"
   ],
   "files": [
