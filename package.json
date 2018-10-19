@@ -1,7 +1,7 @@
 {
   "name": "event-e3",
   "description": "Universal light Event Emitter",
-  "version": "4.0.5",
+  "version": "4.0.6",
   "license": "MIT",
   "devDependencies": {
     "mjs-mocha": "^2.1.2"
@@ -10,8 +10,19 @@
   "scripts": {
     "test": "node --experimental-modules test/EventEmitter3_Test.mjs"
   },
-   "keywords": [
+  "keywords": [
+    "browser",
     "node.js",
+    "universal",
+    "publish",
+    "subscribe",
+    "listen",
+    "message",
+    "sender",
+    "receiver",
+    "observer",
+    "push",
+    "distribution",
     "event",
     "emitter",
     "3",
