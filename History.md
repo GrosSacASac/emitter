@@ -1,3 +1,8 @@
+## 4.1.0
+
+ * commonjs require is avaibable without any extra tool
+ * npm package now includes built/EventEmitter3.js
+
 ## 4.0.5
 
  * Reenable tests

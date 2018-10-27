@@ -11,6 +11,11 @@ Event Emitter 3
 ```js
 import Emitter from "event-e3";
 ```
+or
+
+```js
+const Emitter = require("event-e3");
+```
 
 ## API
 
