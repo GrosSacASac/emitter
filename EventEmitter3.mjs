@@ -23,7 +23,6 @@ EventEmitter3.prototype.on =
 EventEmitter3.prototype.addEventListener = function(event, fn){
   (this._callbacks[event] = this._callbacks[event] || [])
     .push(fn);
-  return this;
 };
 
 /**
@@ -43,7 +42,6 @@ EventEmitter3.prototype.once = function(event, fn){
 
   on.fn = fn;
   this.on(event, on);
-  return this;
 };
 
 /**
@@ -64,17 +62,19 @@ EventEmitter3.prototype.removeEventListener = function(event, fn){
   // all
   if (!event) {
     this._callbacks = Object.create(null);
-    return this;
+    return;
   }
 
   // specific event
   var callbacks = this._callbacks[event];
-  if (!callbacks) return this;
+  if (!callbacks) {
+      return;
+  }
 
   // remove all handlers
   if (!fn) {
     delete this._callbacks[event];
-    return this;
+    return;
   }
 
   // remove specific handler
@@ -90,8 +90,6 @@ EventEmitter3.prototype.removeEventListener = function(event, fn){
   if (callbacks.length === 0) {
     delete this._callbacks[event];
   }
-
-  return this;
 };
 
 /**
@@ -112,8 +110,6 @@ EventEmitter3.prototype.emit = function(event, ...args){
   frozenCallbacks.forEach(callback => {
       callback.apply(this, args);
   });
-
-  return this;
 };
 
 /**
