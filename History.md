@@ -1,3 +1,7 @@
+## 5.0.0
+
+ * disable chaining
+
 ## 4.1.0
 
  * commonjs require is avaibable without any extra tool
