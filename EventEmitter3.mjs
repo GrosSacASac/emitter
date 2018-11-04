@@ -13,9 +13,8 @@ function EventEmitter3(obj) {
 /**
  * Listen on the given `event` with `fn`
  *
- * @param {String} event
+ * @param {any} event
  * @param {Function} fn
- * @return {EventEmitter3}
  * @api public
  */
 
@@ -28,17 +27,16 @@ EventEmitter3.prototype.addEventListener = function(event, fn){
 /**
  * Adds an `event` listener that will be invoked once then removed
  *
- * @param {String} event
+ * @param {any} event
  * @param {Function} fn
- * @return {EventEmitter3}
  * @api public
  */
 
 EventEmitter3.prototype.once = function(event, fn){
-  function on(...args) {
+  const on = (data) => {
     this.off(event, on);
-    fn.apply(this, args);
-  }
+    fn(data);
+  };
 
   on.fn = fn;
   this.on(event, on);
@@ -49,9 +47,8 @@ EventEmitter3.prototype.once = function(event, fn){
  * all callbacks for `event` or
  * all callbacks for all events
  *
- * @param {String} event
+ * @param {any} event
  * @param {Function} fn
- * @return {EventEmitter3}
  * @api public
  */
 
@@ -95,28 +92,26 @@ EventEmitter3.prototype.removeEventListener = function(event, fn){
 /**
  * Emit `event` with args
  *
- * @param {String} event
- * @param {Mixed} ...
- * @return {EventEmitter3}
+ * @param {any} event
+ * @param {any} data
  */
 
-EventEmitter3.prototype.emit = function(event, ...args){
+EventEmitter3.prototype.emit = function(event, data){
   var callbacks = this._callbacks[event];
-
   if (!callbacks) {
       return;
   }
   var frozenCallbacks = Array.from(callbacks);
   frozenCallbacks.forEach(callback => {
-      callback.apply(this, args);
+      callback(data);
   });
 };
 
 /**
  * Return array of callbacks for `event`
  *
- * @param {String} event
- * @return {Array}
+ * @param {any} event
+ * @return {Array} listeners
  * @api public
  */
 
@@ -127,7 +122,7 @@ EventEmitter3.prototype.listeners = function(event){
 /**
  * True if this emitter has `event` handlers
  *
- * @param {String} event
+ * @param {any} event
  * @return {Boolean}
  * @api public
  */

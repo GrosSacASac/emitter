@@ -1,3 +1,8 @@
+## 6.0.0
+
+ * emit now takes exactly two arguments, the second one is optional
+ * `this` is now longer defined in the callback
+
 ## 5.0.0
 
  * disable chaining
