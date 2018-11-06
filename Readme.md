@@ -54,9 +54,9 @@ emitter.emit('new value', 5);
   * Pass `event` to remove all listeners on that event.
   * Pass nothing to remove all listeners on all events.
 
-### .emit(event, ...)
+### .emit(event, data)
 
-  Emit an `event` with any amount of arguments.
+  Emit an `event` with data.
 
 ### .listeners(event)
 
