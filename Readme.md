@@ -11,7 +11,14 @@ Event Emitter 3
 ```js
 import Emitter from "event-e3";
 ```
-or
+
+raw import
+
+```js
+import Emitter from "./node_modules/event-e3/EventEmitter3.mjs";
+```
+
+node
 
 ```js
 const Emitter = require("event-e3");
@@ -19,13 +26,15 @@ const Emitter = require("event-e3");
 
 ## API
 
-### Emitter(obj)
+`eventName` must be a string or a symbol
 
-As a mixin:
+### Emitter
+
+As a decorator:
 
 ```js
-const user = { name: 'tobi' };
-Emitter(user);
+const user = Emitter({ name: 'tobi' });
+
 
 user.emit(`I'm a user`, true);
 ```
@@ -34,37 +43,37 @@ user.emit(`I'm a user`, true);
 
 ```js
 const emitter = new Emitter();
-emitter.emit('new value', 5);
+emitter.emit(`I'm an emitter`, true);
 ```
 
 
-### .on(event, fn)
+### .on(eventName, fn)
 
-  Register an `event` handler `fn`.
+  Register an `eventName` handler `fn`.
 
-### .once(event, fn)
+### .emit(eventName, data)
 
-  Register a single-shot `event` handler `fn`,
+ Emit an event `eventName` with data. Will trigger previously registered handlers
+
+### .once(eventName, fn)
+
+  Register a single-shot `eventName` handler `fn`,
   removed immediately after it is invoked the
   first time.
 
-### .off(event, fn)
+### .off(eventName, fn)
 
-  * Pass `event` and `fn` to remove a listener.
-  * Pass `event` to remove all listeners on that event.
+  * Pass `eventName` and `fn` to remove a listener.
+  * Pass `eventName` to remove all listeners on that eventName.
   * Pass nothing to remove all listeners on all events.
 
-### .emit(event, data)
-
-  Emit an `event` with data.
-
-### .listeners(event)
+### .listeners(eventName)
 
   Return an array of callbacks, or an empty array.
 
-### .hasListeners(event)
+### .hasListeners(eventName)
 
-  True if this emitter has any `event` handlers.
+  True if this emitter has any `eventName` handlers.
 
 ### .eventNames()
 

@@ -11,43 +11,43 @@ function EventEmitter3(obj) {
 };
 
 /**
- * Listen on the given `event` with `fn`
+ * Listen on the given `eventName` with `fn`
  *
- * @param {any} event
+ * @param {String | Symbol} eventName
  * @param {Function} fn
  * @api public
  */
 
 EventEmitter3.prototype.on =
-EventEmitter3.prototype.addEventListener = function(event, fn){
-  (this._callbacks[event] = this._callbacks[event] || [])
+EventEmitter3.prototype.addEventListener = function(eventName, fn){
+  (this._callbacks[eventName] = this._callbacks[eventName] || [])
     .push(fn);
 };
 
 /**
- * Adds an `event` listener that will be invoked once then removed
+ * Adds an `eventName` listener that will be invoked once then removed
  *
- * @param {any} event
+ * @param {String | Symbol} eventName
  * @param {Function} fn
  * @api public
  */
 
-EventEmitter3.prototype.once = function(event, fn){
+EventEmitter3.prototype.once = function(eventName, fn){
   const on = (data) => {
-    this.off(event, on);
+    this.off(eventName, on);
     fn(data);
   };
 
   on.fn = fn;
-  this.on(event, on);
+  this.on(eventName, on);
 };
 
 /**
- * Remove callback for `event` or
- * all callbacks for `event` or
+ * Remove callback for `eventName` or
+ * all callbacks for `eventName` or
  * all callbacks for all events
  *
- * @param {any} event
+ * @param {String | Symbol} eventName
  * @param {Function} fn
  * @api public
  */
@@ -55,22 +55,22 @@ EventEmitter3.prototype.once = function(event, fn){
 EventEmitter3.prototype.off =
 EventEmitter3.prototype.removeListener =
 EventEmitter3.prototype.removeAllListeners =
-EventEmitter3.prototype.removeEventListener = function(event, fn){
+EventEmitter3.prototype.removeEventListener = function(eventName, fn){
   // all
-  if (!event) {
+  if (!eventName) {
     this._callbacks = Object.create(null);
     return;
   }
 
   // specific event
-  var callbacks = this._callbacks[event];
+  var callbacks = this._callbacks[eventName];
   if (!callbacks) {
       return;
   }
 
   // remove all handlers
   if (!fn) {
-    delete this._callbacks[event];
+    delete this._callbacks[eventName];
     return;
   }
 
@@ -82,22 +82,22 @@ EventEmitter3.prototype.removeEventListener = function(event, fn){
       callbacks.splice(index, 1);
   }
 
-  // Remove event specific arrays for the event type that no
+  // Remove event specific arrays for the eventName type that no
   // one is subscribed for, to avoid memory leak.
   if (callbacks.length === 0) {
-    delete this._callbacks[event];
+    delete this._callbacks[eventName];
   }
 };
 
 /**
- * Emit `event` with args
+ * Emit `eventName` with data
  *
- * @param {any} event
+ * @param {String | Symbol} eventName
  * @param {any} data
  */
 
-EventEmitter3.prototype.emit = function(event, data){
-  var callbacks = this._callbacks[event];
+EventEmitter3.prototype.emit = function(eventName, data){
+  var callbacks = this._callbacks[eventName];
   if (!callbacks) {
       return;
   }
@@ -108,27 +108,27 @@ EventEmitter3.prototype.emit = function(event, data){
 };
 
 /**
- * Return array of callbacks for `event`
+ * Return array of callbacks for `eventName`
  *
- * @param {any} event
+ * @param {String | Symbol} eventName
  * @return {Array} listeners
  * @api public
  */
 
-EventEmitter3.prototype.listeners = function(event){
-  return this._callbacks[event] || [];
+EventEmitter3.prototype.listeners = function(eventName){
+  return this._callbacks[eventName] || [];
 };
 
 /**
- * True if this emitter has `event` handlers
+ * True if this emitter has `eventName` handlers
  *
- * @param {any} event
+ * @param {String | Symbol} eventName
  * @return {Boolean}
  * @api public
  */
 
-EventEmitter3.prototype.hasListeners = function(event){
-  return Boolean(this.listeners(event).length);
+EventEmitter3.prototype.hasListeners = function(eventName){
+  return Boolean(this.listeners(eventName).length);
 };
 
 /**
