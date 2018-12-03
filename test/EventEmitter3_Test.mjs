@@ -3,51 +3,47 @@ import assert from 'assert'
 import 'mjs-mocha';
 
 
-describe('Prototype inheritance', function(){
-  describe('with Emitter.call(this)', function(){
-    it('should work', function(done) {
-      /* done is undefined
-      https://github.com/vpotseluyko/mjs-mocha/blob/master/src/mocha.mjs#L38
-      */
-      let run = false
-        function Custom() {
-          Emitter.call(this)
-        }
+describe('Prototype inheritance with Emitter.call(this)', function(){
+it('should work', function(done) {
+  /* done is undefined
+  https://github.com/vpotseluyko/mjs-mocha/blob/master/src/mocha.mjs#L38
+  */
+  let run = false
+    function Custom() {
+      Emitter.call(this)
+    }
 
-        Custom.prototype.__proto__ = Emitter.prototype;
+    Custom.prototype.__proto__ = Emitter.prototype;
 
-      var emitter = new Custom();
-      emitter.on('foo', () => {
-        run = true
-      });
-      emitter.emit('foo');
+  var emitter = new Custom();
+  emitter.on('foo', () => {
+    run = true
+  });
+  emitter.emit('foo');
 
-      assert.deepEqual(run, true);
-    })
-  })
+  assert.deepEqual(run, true);
+})
 })
 
-describe('Prototype inheritance using class syntax', function(){
-  describe('with super', function(){
-    it('should work', function(done) {
 
-      let run = false
-      class Custom extends Emitter() {
-          constructor() {
-            super()
-          }
-          
-        }
+describe('Prototype inheritance using class syntax with super', function(){
+it(`should work`, function(done) {
 
-      var emitter = new Custom();
-      emitter.on('foo', () => {
-        run = true
-      });
-      emitter.emit('foo');
+  let run = false
+  class CustomE extends Emitter {
+      constructor() {
+        super()
+      }
+    }
 
-      assert.deepEqual(run, true);
-    })
-  })
+  var emitter = new CustomE();
+  emitter.on('foo', () => {
+    run = true
+  });
+  emitter.emit('foo');
+
+  assert.deepEqual(run, true);
+})
 })
 
 describe('Emitter', function() {
