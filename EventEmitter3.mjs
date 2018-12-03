@@ -63,7 +63,7 @@ EventEmitter3.prototype.removeEventListener = function(eventName, fn){
   }
 
   // specific event
-  var callbacks = this._callbacks[eventName];
+  const callbacks = this._callbacks[eventName];
   if (!callbacks) {
       return;
   }
@@ -75,7 +75,7 @@ EventEmitter3.prototype.removeEventListener = function(eventName, fn){
   }
 
   // remove specific handler
-  var index = callbacks.findIndex(function (cb) {
+  const index = callbacks.findIndex(function (cb) {
       return (cb === fn || cb.fn === fn)
   });
   if (index > -1) {
@@ -97,11 +97,11 @@ EventEmitter3.prototype.removeEventListener = function(eventName, fn){
  */
 
 EventEmitter3.prototype.emit = function(eventName, data){
-  var callbacks = this._callbacks[eventName];
+  const callbacks = this._callbacks[eventName];
   if (!callbacks) {
       return;
   }
-  var frozenCallbacks = Array.from(callbacks);
+  const frozenCallbacks = Array.from(callbacks);
   frozenCallbacks.forEach(callback => {
       callback(data);
   });
