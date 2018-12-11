@@ -3,7 +3,7 @@ import assert from 'assert'
 import 'mjs-mocha';
 
 
-describe('Prototype inheritance with Emitter.call(this)', function(){
+describe('Prototype inheritance with .prototype and .call syntax', function(){
 it('should work', function(done) {
   /* done is undefined
   https://github.com/vpotseluyko/mjs-mocha/blob/master/src/mocha.mjs#L38
@@ -13,9 +13,10 @@ it('should work', function(done) {
       Emitter.call(this)
     }
 
-    Custom.prototype.__proto__ = Emitter.prototype;
+    Object.setPrototypeOf(Custom.prototype, Emitter.prototype);
 
   var emitter = new Custom();
+  
   emitter.on('foo', () => {
     run = true
   });
