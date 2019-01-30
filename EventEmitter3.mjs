@@ -33,13 +33,13 @@ EventEmitter3.prototype.addEventListener = function(eventName, fn){
  */
 
 EventEmitter3.prototype.once = function(eventName, fn){
-  const on = (data) => {
-    this.off(eventName, on);
+  const once = (data) => {
+    this.off(eventName, once);
     fn(data);
   };
 
-  on.fn = fn;
-  this.on(eventName, on);
+  once.fn = fn; // makes it possible to remove with off
+  this.on(eventName, once);
 };
 
 /**
