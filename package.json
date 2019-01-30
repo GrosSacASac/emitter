@@ -1,7 +1,7 @@
 {
   "name": "event-e3",
   "description": "Universal light Event Emitter",
-  "version": "6.0.5",
+  "version": "6.0.6",
   "license": "MIT",
   "devDependencies": {
     "mjs-mocha": "^2.1.2",
