@@ -34,7 +34,7 @@
   "files": [
     "EventEmitter3.mjs",
     "built/EventEmitter3.js",
-    "History.md",
+    "Changelog.md",
     "LICENSE"
   ],
   "repository": {

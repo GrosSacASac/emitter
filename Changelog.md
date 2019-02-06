@@ -1,10 +1,12 @@
 # Changelog
 
+
 ## 7.0.0
 
  * removed .addEventListener alias, use .on instead
  * removed .removeListener .removeAllListeners .removeEventListener aliases, use .off instead
- 
+ * Renamed History.md into Changelog.md
+  
  ## 6.0.0
 
  * emit now takes exactly two arguments, the second one is optional
