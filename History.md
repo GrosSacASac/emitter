@@ -1,4 +1,11 @@
-## 6.0.0
+# Changelog
+
+## 7.0.0
+
+ * removed .addEventListener alias, use .on instead
+ * removed .removeListener .removeAllListeners .removeEventListener aliases, use .off instead
+ 
+ ## 6.0.0
 
  * emit now takes exactly two arguments, the second one is optional
  * `this` is now longer defined in the callback

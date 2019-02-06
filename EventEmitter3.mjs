@@ -18,8 +18,7 @@ function EventEmitter3(obj) {
  * @api public
  */
 
-EventEmitter3.prototype.on =
-EventEmitter3.prototype.addEventListener = function(eventName, fn){
+EventEmitter3.prototype.on = function(eventName, fn) {
   (this._callbacks[eventName] = this._callbacks[eventName] || [])
     .push(fn);
 };
@@ -32,7 +31,7 @@ EventEmitter3.prototype.addEventListener = function(eventName, fn){
  * @api public
  */
 
-EventEmitter3.prototype.once = function(eventName, fn){
+EventEmitter3.prototype.once = function(eventName, fn) {
   const once = (data) => {
     this.off(eventName, once);
     fn(data);
@@ -52,10 +51,7 @@ EventEmitter3.prototype.once = function(eventName, fn){
  * @api public
  */
 
-EventEmitter3.prototype.off =
-EventEmitter3.prototype.removeListener =
-EventEmitter3.prototype.removeAllListeners =
-EventEmitter3.prototype.removeEventListener = function(eventName, fn){
+EventEmitter3.prototype.off = function(eventName, fn) {
   // all
   if (!eventName) {
     this._callbacks = Object.create(null);
@@ -96,7 +92,7 @@ EventEmitter3.prototype.removeEventListener = function(eventName, fn){
  * @param {any} data
  */
 
-EventEmitter3.prototype.emit = function(eventName, data){
+EventEmitter3.prototype.emit = function(eventName, data) {
   const callbacks = this._callbacks[eventName];
   if (!callbacks) {
       return;
@@ -115,7 +111,7 @@ EventEmitter3.prototype.emit = function(eventName, data){
  * @api public
  */
 
-EventEmitter3.prototype.listeners = function(eventName){
+EventEmitter3.prototype.listeners = function(eventName) {
   return this._callbacks[eventName] || [];
 };
 
@@ -127,7 +123,7 @@ EventEmitter3.prototype.listeners = function(eventName){
  * @api public
  */
 
-EventEmitter3.prototype.hasListeners = function(eventName){
+EventEmitter3.prototype.hasListeners = function(eventName) {
   return Boolean(this.listeners(eventName).length);
 };
 
@@ -137,7 +133,7 @@ EventEmitter3.prototype.hasListeners = function(eventName){
  * @return {Array}
  * @api public
  */
-EventEmitter3.prototype.eventNames = function(){
+EventEmitter3.prototype.eventNames = function() {
   return Object.keys(this._callbacks);
 }
 
