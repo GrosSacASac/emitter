@@ -26,6 +26,22 @@ it('should work', function(done) {
 })
 })
 
+describe('Symbols or Stings for eventName', function(){
+  it('Symbols should be returned by eventNames', function() {
+    const emitter = new Emitter();
+    const s = Symbol();
+    emitter.on(s, () => {});
+
+    assert.equal(emitter.eventNames()[0], s);
+  })
+  it('Symbols should be taken into account', function() {
+    const emitter = new Emitter();
+    const s = Symbol();
+    emitter.on(s, () => {});
+
+    assert.equal(emitter.hasListeners(s), true);
+  })
+})
 
 describe('Prototype inheritance using class syntax with super', function(){
 it(`should work`, function(done) {
