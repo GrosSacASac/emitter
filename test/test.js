@@ -1,19 +1,13 @@
+import test from 'ava';
 import Emitter from '../EventEmitter3.mjs';
-import assert from 'assert'
-import 'mjs-mocha';
 
-
-describe('Prototype inheritance with .prototype and .call syntax', function(){
-it('should work', function(done) {
-  /* done is undefined
-  https://github.com/vpotseluyko/mjs-mocha/blob/master/src/mocha.mjs#L38
-  */
+test('Prototype inheritance with .prototype and .call syntax', t => {
   let run = false
-    function Custom() {
-      Emitter.call(this)
-    }
+  function Custom() {
+    Emitter.call(this)
+  }
 
-    Object.setPrototypeOf(Custom.prototype, Emitter.prototype);
+  Object.setPrototypeOf(Custom.prototype, Emitter.prototype);
 
   var emitter = new Custom();
   
@@ -22,36 +16,18 @@ it('should work', function(done) {
   });
   emitter.emit('foo');
 
-  assert.deepEqual(run, true);
-})
-})
+	t.is(run, true);
+	t.pass();
+});
 
-describe('Symbols or Stings for eventName', function(){
-  it('Symbols should be returned by eventNames', function() {
-    const emitter = new Emitter();
-    const s = Symbol();
-    emitter.on(s, () => {});
 
-    assert.equal(emitter.eventNames()[0], s);
-  })
-  it('Symbols should be taken into account', function() {
-    const emitter = new Emitter();
-    const s = Symbol();
-    emitter.on(s, () => {});
-
-    assert.equal(emitter.hasListeners(s), true);
-  })
-})
-
-describe('Prototype inheritance using class syntax with super', function(){
-it(`should work`, function(done) {
-
+test('Prototype inheritance using class syntax with super', t => {
   let run = false
   class CustomE extends Emitter {
-      constructor() {
-        super()
-      }
+    constructor() {
+      super()
     }
+  }
 
   var emitter = new CustomE();
   emitter.on('foo', () => {
@@ -59,13 +35,29 @@ it(`should work`, function(done) {
   });
   emitter.emit('foo');
 
-  assert.deepEqual(run, true);
-})
+  t.is(run, true);
+  t.pass();
+  })
+
+test('Symbols or Stings for eventName, Symbols should be returned by eventNames', t => {
+    const emitter = new Emitter();
+    const s = Symbol();
+    emitter.on(s, () => {});
+
+    t.is(emitter.eventNames()[0], s);
 })
 
-describe('Emitter', function() {
-  describe('.on(event, fn)', function(){
-    it('should add listeners', function(){
+test('Symbols should be taken into account', t => {
+    const emitter = new Emitter();
+    const s = Symbol();
+    emitter.on(s, () => {});
+
+    t.is(emitter.hasListeners(s), true);
+})
+
+
+
+    test('Emitter.on(event, fn) should add listeners', t => {
       var emitter = new Emitter();
       var calls = [];
 
@@ -81,10 +73,10 @@ describe('Emitter', function() {
       emitter.emit('bar', 1);
       emitter.emit('foo', 2);
 
-      assert.deepEqual(calls, [ 'one', 1, 'two', 1, 'one', 2, 'two', 2 ]);
+      t.deepEqual(calls, [ 'one', 1, 'two', 1, 'one', 2, 'two', 2 ]);
     })
 
-    it('should also work with symbols', function(){
+    test('should also work with symbols', t => {
       var eventName = Symbol()
       var emitter = new Emitter();
       var calls = [];
@@ -95,10 +87,10 @@ describe('Emitter', function() {
 
       emitter.emit(eventName, 1);
 
-      assert.deepEqual(calls, ['one', 1]);
+      t.deepEqual(calls, ['one', 1]);
     })
 
-    it('should add listeners for events which are same names with methods of Object.prototype', function(){
+    test('should add listeners for events which are same names with methods of Object.prototype', t => {
       var emitter = new Emitter();
       var calls = [];
 
@@ -113,12 +105,12 @@ describe('Emitter', function() {
       emitter.emit('constructor', 1);
       emitter.emit('__proto__', 2);
 
-      assert.deepEqual(calls, [ 'one', 1, 'two', 2 ]);
+      t.deepEqual(calls, [ 'one', 1, 'two', 2 ]);
     })
-  })
 
-  describe('.once(event, fn)', function(){
-    it('should add a single-shot listener', function(){
+
+
+    test('.once(event, fn) should add a single-shot listener', t => {
       var emitter = new Emitter();
       var calls = [];
 
@@ -131,12 +123,12 @@ describe('Emitter', function() {
       emitter.emit('foo', 3);
       emitter.emit('bar', 1);
 
-      assert.deepEqual(calls, [ 'one', 1 ]);
+      t.deepEqual(calls, [ 'one', 1 ]);
     })
-  })
 
-  describe('.off(event, fn)', function(){
-    it('should remove a listener', function(){
+
+
+    test('.off(event, fn) should remove a listener', t => {
       var emitter = new Emitter();
       var calls = [];
 
@@ -149,10 +141,10 @@ describe('Emitter', function() {
 
       emitter.emit('foo');
 
-      assert.deepEqual(calls, [ 'one' ]);
+      t.deepEqual(calls, [ 'one' ]);
     })
 
-    it('should work with .once()', function(){
+    test('should work with .once()', t => {
       var emitter = new Emitter();
       var calls = [];
 
@@ -164,10 +156,10 @@ describe('Emitter', function() {
 
       emitter.emit('foo');
 
-      assert.deepEqual(calls, []);
+      t.deepEqual(calls, []);
     })
 
-    it('should work when called from an event', function(){
+    test('should work when called from an event', t => {
       var emitter = new Emitter()
         , called
       function b () {
@@ -179,15 +171,15 @@ describe('Emitter', function() {
       });
 
       emitter.emit('tobi');
-      assert.equal(called, true);
+      t.is(called, true);
       called = false;
       emitter.emit('tobi');
-      assert.equal(called, false);
+      t.is(called, false);
     });
-  })
 
-  describe('.off(event)', function(){
-    it('should remove all listeners for an event', function(){
+
+
+    test('.off(event) should remove all listeners for an event', t => {
       var emitter = new Emitter();
       var calls = [];
 
@@ -201,10 +193,10 @@ describe('Emitter', function() {
       emitter.emit('foo');
       emitter.emit('foo');
 
-      assert.deepEqual(calls, []);
+      t.deepEqual(calls, []);
     })
 
-    it('should remove event array to avoid memory leak', function() {
+    test('should remove event array to avoid memory leak', t => {
       var emitter = new Emitter();
 
       function cb() {}
@@ -212,11 +204,11 @@ describe('Emitter', function() {
       emitter.on('foo', cb);
       emitter.off('foo', cb);
 
-      // because it has no prototype
-      assert.equal(emitter.hasListeners('foo'), false);
+  
+      t.is(emitter.hasListeners('foo'), false);
     })
 
-    it('should only remove the event array when the last subscriber unsubscribes', function() {
+    test('should only remove the event array when the last subscriber unsubscribes', t => {
       var emitter = new Emitter();
 
       function cb1() {}
@@ -226,12 +218,11 @@ describe('Emitter', function() {
       emitter.on('foo', cb2);
       emitter.off('foo', cb1);
 
-      assert.equal(emitter.hasListeners('foo'), true);
+      t.is(emitter.hasListeners('foo'), true);
     })
-  })
 
-  describe('.off()', function(){
-    it('should remove all listeners', function(){
+
+    test('.off() should remove all listeners', t => {
       var emitter = new Emitter();
       var calls = [];
 
@@ -249,48 +240,41 @@ describe('Emitter', function() {
       emitter.emit('foo');
       emitter.emit('bar');
 
-      assert.deepEqual(calls, ['one', 'two'])
+      t.deepEqual(calls, ['one', 'two'])
     })
-  })
 
-  describe('.listeners(event)', function(){
-    describe('when handlers are present', function(){
-      it('should return an array of callbacks', function(){
+
+
+      test('.listeners(event) when handlers are present should return an array of callbacks', t => {
         var emitter = new Emitter();
         function foo(){}
         emitter.on('foo', foo);
-        assert.deepEqual(emitter.listeners('foo'), [foo]);
+        t.deepEqual(emitter.listeners('foo'), [foo]);
       })
-    })
+    
 
-    describe('when no handlers are present', function(){
-      it('should return an empty array', function(){
+
+      test(' when no handlers are present should return an empty array', t => {
         var emitter = new Emitter();
-        assert.deepEqual(emitter.listeners('foo'), []);
+        t.deepEqual(emitter.listeners('foo'), []);
       })
-    })
-  })
 
-  describe('.hasListeners(event)', function(){
-    describe('when handlers are present', function(){
-      it('should return true', function(){
+
+      test('.hasListeners(event) when handlers are present should return true', t => {
         var emitter = new Emitter();
         emitter.on('foo', function(){});
-        assert.equal(emitter.hasListeners('foo'), true);
+        t.is(emitter.hasListeners('foo'), true);
       })
-    })
 
-    describe('when no handlers are present', function(){
-      it('should return false', function(){
+
+
+      test('when no handlers are present should return false', t => {
         var emitter = new Emitter();
-        assert.equal(emitter.hasListeners('foo'), false);
+        t.is(emitter.hasListeners('foo'), false);
       })
-    })
-  })
-})
 
-describe('Emitter(obj)', function(){
-  it('should mixin', function(){
+
+  test('Emitter(obj) should mixin', t => {
     var calls = [];
 
     var proto = {};
@@ -300,12 +284,11 @@ describe('Emitter(obj)', function(){
     });
     proto.emit('something');
 
-    assert.deepEqual(calls, [7]);
+    t.deepEqual(calls, [7]);
   })
 
 
-  describe('prototype mixin is available in this version https://github.com/GrosSacASac/emitter/releases/tag/1.3.7', function(){
-	  it('should work on instances', function(){
+	  test('prototype mixin is available in this version https://github.com/GrosSacASac/emitter/releases/tag/1.3.7 should work on instances', t => {
       var User = function (name, age = 18) {
         this.age = age;
         // this.name = name;
@@ -319,10 +302,10 @@ describe('Emitter(obj)', function(){
       });
       julie.emit('birthday');
 
-      assert.equal(julie.age, 19);
+      t.is(julie.age, 19);
 	  })
 
-    it('should work separately on many instances', function() {
+    test('should work separately on many instances', t => {
       var User = function (name, age = 18) {
         this.age = age;
       };
@@ -339,11 +322,11 @@ describe('Emitter(obj)', function(){
       });
       julie.emit('birthday');
 
-      assert.equal(julie.age, 19);
-      assert.equal(moritz.age, 19, 'it was not the birthday of Moritz');
+      t.is(julie.age, 19);
+      t.is(moritz.age, 19, 'test was not the birthday of Moritz');
     })
 
-    it('should work separately on instance and constructor', function() {
+    test('should work separately on instance and constructor', t => {
       var User = function (name, age = 18) {
         this.age = age;
       };
@@ -359,12 +342,10 @@ describe('Emitter(obj)', function(){
       });
       User.prototype.emit('birthday');
 
-      assert.equal(julie.age, 19);
-      assert.equal(age, 1001);
+      t.is(julie.age, 19);
+      t.is(age, 1001);
 
       julie.emit('birthday');
-      assert.equal(julie.age, 20);
-      assert.equal(age, 1002);
+      t.is(julie.age, 20);
+      t.is(age, 1002);
     })
-  })
-})

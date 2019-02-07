@@ -1,18 +1,37 @@
 {
   "name": "event-e3",
   "description": "Universal light Event Emitter",
-  "version": "7.0.1",
+  "version": "7.0.2",
   "license": "MIT",
   "devDependencies": {
-    "mjs-mocha": "2.1.2",
+    "ava": "^1.2.1",
+    "esm": "^3.2.3",
     "rollup": "^1.1.2"
   },
   "module": "EventEmitter3.mjs",
   "main": "built/EventEmitter3.js",
   "scripts": {
-    "test": "node --experimental-modules test/EventEmitter3_Test.mjs",
+    "test": "ava",
     "rollup": "rollup EventEmitter3.mjs --format umd --name Emitter --file built/EventEmitter3.js",
     "prepublishOnly": "npm run rollup"
+  },
+  "ava": {
+    "require": [
+      "esm"
+    ],
+    "babel": {
+      "testOptions": {
+        "presets": [
+          [
+            "module:ava/stage-4",
+            {
+              "modules": false
+            }
+          ]
+        ]
+      }
+    },
+    "compileEnhancements": false
   },
   "keywords": [
     "browser",
