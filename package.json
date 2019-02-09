@@ -1,7 +1,7 @@
 {
   "name": "event-e3",
   "description": "Universal light Event Emitter",
-  "version": "7.0.2",
+  "version": "7.0.3",
   "license": "MIT",
   "devDependencies": {
     "ava": "^1.2.1",
@@ -54,7 +54,9 @@
     "EventEmitter3.mjs",
     "built/EventEmitter3.js",
     "Changelog.md",
-    "LICENSE"
+    "LICENSE",
+    "examples/active_provider.js",
+    "examples/listener.js"
   ],
   "repository": {
     "type": "git",

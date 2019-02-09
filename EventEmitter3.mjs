@@ -1,6 +1,7 @@
 /**
  * Use it as a constructor
  * or as a decorator for an existing object
+ * or as a base class for extend
  * cannot be used as a mixin for a constructor's prototype
  * @api public
  */

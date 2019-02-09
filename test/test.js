@@ -17,7 +17,6 @@ test('Prototype inheritance with .prototype and .call syntax', t => {
   emitter.emit('foo');
 
 	t.is(run, true);
-	t.pass();
 });
 
 
@@ -36,7 +35,6 @@ test('Prototype inheritance using class syntax with super', t => {
   emitter.emit('foo');
 
   t.is(run, true);
-  t.pass();
   })
 
 test('Symbols or Stings for eventName, Symbols should be returned by eventNames', t => {
