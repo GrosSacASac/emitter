@@ -6,14 +6,14 @@
 
 ## 7.0.0
 
- * removed .addEventListener alias, use .on instead
- * removed .removeListener .removeAllListeners .removeEventListener aliases, use .off instead
- * Renamed History.md into Changelog.md
+ * remove .addEventListener alias, use .on instead
+ * remove .removeListener .removeAllListeners .removeEventListener aliases, use .off instead
+ * Rename History.md into Changelog.md
   
  ## 6.0.0
 
- * emit now takes exactly two arguments, the second one is optional
- * `this` is now longer defined in the callback
+ * emit takes exactly two arguments, the second one is optional
+ * `this` is not defined in the callback
 
 ## 5.0.0
 
@@ -22,7 +22,7 @@
 ## 4.1.0
 
  * commonjs require is avaibable without any extra tool
- * npm package now includes built/EventEmitter3.js
+ * npm package includes built/EventEmitter3.js
 
 ## 4.0.5
 
@@ -51,18 +51,18 @@
 
 ## 1.3.7 / 2018-08-30
 
- * Implementation changed
+ * Implementation change
  * avoid mixin polution
 
 ## 1.3.0 / 2017-02-19
 
- * Added `eventNames`
+ * Add `eventNames`
 
 ## 1.2.2 / 2017-02-19
 
- * Optimized emit
- * Fixed memory leak
- * Replaced `$` prefixing with `Object.create(null)`
+ * Optimize emit
+ * Fix memory leak
+ * Replace `$` prefixing with `Object.create(null)`
 
 ## 1.2.1 / 2016-04-18
 
@@ -88,7 +88,6 @@
 ## 1.1.1 / 2013-12-01
 
   * fix .once adding .on to the listener
-  * docs: Emitter#off()
   * component: add `.repo` prop
 
 ## 1.1.0 / 2013-10-20
