@@ -43,7 +43,7 @@ EventEmitter3.prototype.once = function(eventName, fn) {
 };
 
 /**
- * Remove callback for `eventName` or
+ * Remove a callback for `eventName` or
  * all callbacks for `eventName` or
  * all callbacks for all events
  *

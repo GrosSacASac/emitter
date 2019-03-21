@@ -1,5 +1,8 @@
 # Changelog
 
+## 7.1.0
+
+ * add EmitterListener as something that can also be imported
 
 ## 7.0.0
 

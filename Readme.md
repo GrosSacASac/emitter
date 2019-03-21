@@ -79,6 +79,19 @@ emitter.emit(`I'm an emitter`, true);
 
   Returns an array listing the events for which the emitter has registered listeners.
 
+
+## EmitterListener
+
+EmitterListener is like Emitter but also allow to subscribe to subscriptions and unsubscriptions. It can only be used as a constructor, example usage:
+
+```
+import {EmitterListener, onSubscribe, onUnsubscribe} from "event-e3/source/EmitterListener";
+const x = new EmitterListener(); 
+
+x.on(onSubscribe, console.log.bind('console', 'on\'ed'))
+x.on(onUnsubscribe, console.log.bind('console', 'off\'ed')) 
+```
+
 ## Tests
 
 `npm t`
