@@ -1,5 +1,9 @@
 # Changelog
 
+## 7.4.0
+
+ * add RegularListener
+
 ## 7.3.0
 
  * add filterEventStream

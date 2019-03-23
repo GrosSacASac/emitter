@@ -105,6 +105,10 @@ x.on(onFirstSubscribe, console.log.bind('console', 'on\'ed'))
 x.on(onLastUnsubscribe, console.log.bind('console', 'off\'ed')) 
 ```
 
+## RegularListener
+
+Extends EmitterListenerPlus, also emits `onFirstSubscribeString` and `onLastUnsubscribeString`
+
 ## filterEventStream
 
 Makes it convenient to filter an event stream. The new event stream is emitted on the same emitter as regular events.
@@ -133,4 +137,4 @@ earthQuakeEmitter.on('BigEarthQuake', humanHelpWithoutBorders.organize);
 
 ## License
 
-MIT
+[MIT](./LICENSE)
