@@ -82,7 +82,7 @@ emitter.emit(`I'm an emitter`, true);
 
 ## EmitterListener
 
-EmitterListener is like Emitter but also allow to subscribe to subscriptions and unsubscriptions. It can only be used as a constructor, example usage:
+EmitterListener exposes a way to subscribe to subscriptions and unsubscriptions. It can only be used as a constructor, example usage:
 
 ```
 import {EmitterListener, onSubscribe, onUnsubscribe} from "event-e3/source/EmitterListener.js";
@@ -95,7 +95,7 @@ x.on(onUnsubscribe, console.log.bind('console', 'off\'ed'))
 
 ## EmitterListenerPlus
 
-EmitterListener further extends EmitterListener. It can be used to direclty list for the first subscription and last unsubscription for a given event name and  It can only be used as a constructor, example usage:
+EmitterListener further extends EmitterListener. It can be used to direclty listen for the first subscription and last unsubscription for a given event name and  It can only be used as a constructor, example usage:
 
 ```
 import {EmitterListenerPlus, onFirstSubscribe, onLastUnsubscribe, onSubscribe, onUnsubscribe} from "event-e3/source/EmitterListenerPlus.js";
@@ -107,15 +107,24 @@ x.on(onLastUnsubscribe, console.log.bind('console', 'off\'ed'))
 
 ## filterEventStream
 
-Makes it convenient to filter an event stream. The new event stream is emitted on the same emitter and can be filtered again.
+Makes it convenient to filter an event stream. The new event stream is emitted on the same emitter as regular events.
 
-An example use case: An Emitter emits 'Earthquake'. But you are only really interested in big ones.
+An example use case: An Emitter emits 'Earthquake' for the scientific community. But the general public is interested in big ones only.
 
 ```
+import Emitter from "event-e3";
+import {filterEventStream} from "event-e3/source/filterEventStream.js";
 const earthQuakeEmitter = Emitter({});
 
 const isBigEarthQuake = earthQuake => earthQuake.richterScale > 6;
 filterEventStream(earthQuakeEmitter, 'Earthquake', 'BigEarthQuake', isBigEarthQuake);
+
+// the original event is still emitted
+earthQuakeEmitter.on('Earthquake', scientificCommunity.study);
+
+// 'BigEarthQuake' happens sometimes
+earthQuakeEmitter.on('BigEarthQuake', newsAggregator.publishNews);
+earthQuakeEmitter.on('BigEarthQuake', humanHelpWithoutBorders.organize);
 ```
 
 ## Tests
