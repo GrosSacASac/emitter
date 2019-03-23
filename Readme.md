@@ -105,6 +105,19 @@ x.on(onFirstSubscribe, console.log.bind('console', 'on\'ed'))
 x.on(onLastUnsubscribe, console.log.bind('console', 'off\'ed')) 
 ```
 
+## filterEventStream
+
+Makes it convenient to filter an event stream. The new event stream is emitted on the same emitter and can be filtered again.
+
+An example use case: An Emitter emits 'Earthquake'. But you are only really interested in big ones.
+
+```
+const earthQuakeEmitter = Emitter({});
+
+const isBigEarthQuake = earthQuake => earthQuake.richterScale > 6;
+filterEventStream(earthQuakeEmitter, 'Earthquake', 'BigEarthQuake', isBigEarthQuake);
+```
+
 ## Tests
 
 `npm t`

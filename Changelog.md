@@ -1,5 +1,9 @@
 # Changelog
 
+## 7.3.0
+
+ * add filterEventStream
+
 ## 7.2.0
 
  * add EmitterListenerPlus
