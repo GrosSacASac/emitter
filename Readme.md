@@ -85,11 +85,24 @@ emitter.emit(`I'm an emitter`, true);
 EmitterListener is like Emitter but also allow to subscribe to subscriptions and unsubscriptions. It can only be used as a constructor, example usage:
 
 ```
-import {EmitterListener, onSubscribe, onUnsubscribe} from "event-e3/source/EmitterListener";
+import {EmitterListener, onSubscribe, onUnsubscribe} from "event-e3/source/EmitterListener.js";
 const x = new EmitterListener(); 
 
 x.on(onSubscribe, console.log.bind('console', 'on\'ed'))
 x.on(onUnsubscribe, console.log.bind('console', 'off\'ed')) 
+```
+
+
+## EmitterListenerPlus
+
+EmitterListener further extends EmitterListener. It can be used to direclty list for the first subscription and last unsubscription for a given event name and  It can only be used as a constructor, example usage:
+
+```
+import {EmitterListenerPlus, onFirstSubscribe, onLastUnsubscribe, onSubscribe, onUnsubscribe} from "event-e3/source/EmitterListenerPlus.js";
+const x = new EmitterListenerPlus(); 
+
+x.on(onFirstSubscribe, console.log.bind('console', 'on\'ed'))
+x.on(onLastUnsubscribe, console.log.bind('console', 'off\'ed')) 
 ```
 
 ## Tests
