@@ -1,11 +1,11 @@
 {
   "name": "event-e3",
   "description": "Universal light Event Emitter",
-  "version": "7.5.0",
+  "version": "7.5.2",
   "license": "MIT",
   "devDependencies": {
-    "ava": "^1.2.1",
-    "esm": "^3.2.3",
+    "ava": "^1.4.0",
+    "esm": "^3.2.20",
     "rollup": "^1.7.3"
   },
   "module": "EventEmitter3.mjs",

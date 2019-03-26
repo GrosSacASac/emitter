@@ -1,6 +1,6 @@
 /*
  pattern to be used to reduce efforts in case nothing is listening to an event
-
+ could also be using EmitterListener.js
 */
 
 export {weatherForecastEvent, acitveDataProvider};
