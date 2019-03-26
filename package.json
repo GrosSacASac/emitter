@@ -6,7 +6,7 @@
   "devDependencies": {
     "ava": "^1.2.1",
     "esm": "^3.2.3",
-    "rollup": "^1.1.2"
+    "rollup": "^1.7.3"
   },
   "module": "EventEmitter3.mjs",
   "main": "built/EventEmitter3.js",
