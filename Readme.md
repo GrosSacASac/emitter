@@ -10,17 +10,9 @@ Event Emitter 3
 
 ```js
 import Emitter from "event-e3";
-```
-
-raw import
-
-```js
+// raw import
 import Emitter from "./node_modules/event-e3/EventEmitter3.mjs";
-```
-
-node
-
-```js
+// with require()
 const Emitter = require("event-e3");
 ```
 
@@ -34,32 +26,26 @@ As a decorator:
 
 ```js
 const user = Emitter({ name: 'tobi' });
-
-
-user.emit(`I'm a user`, true);
 ```
 
-  As an instance:
+As an instance:
 
 ```js
 const emitter = new Emitter();
-emitter.emit(`I'm an emitter`, true);
 ```
 
 
 ### .on(eventName, fn)
 
-  Register an `eventName` handler `fn`.
+Register an `eventName` handler `fn`.
 
 ### .emit(eventName, data)
 
- Emit an event `eventName` with data. Will trigger previously registered handlers
+Emit an event `eventName` with data. Will trigger previously registered handlers
 
 ### .once(eventName, fn)
 
-  Register a single-shot `eventName` handler `fn`,
-  removed immediately after it is invoked the
-  first time.
+Register a single-shot `eventName` handler `fn`, removed immediately after it is invoked the first time.
 
 ### .off(eventName, fn)
 
@@ -69,15 +55,19 @@ emitter.emit(`I'm an emitter`, true);
 
 ### .listeners(eventName)
 
-  Return an array of callbacks, or an empty array.
+Return an array of callbacks, or an empty array.
 
 ### .hasListeners(eventName)
 
-  True if this emitter has any `eventName` handlers.
+True if this emitter has any `eventName` handlers.
 
 ### .eventNames()
 
-  Returns an array listing the events for which the emitter has registered listeners.
+Returns an array listing the events for which the emitter has registered listeners.
+
+### .eventNamesStrings()
+
+Same as `.eventNames()` but the array is only Strings.
 
 
 ## EmitterListener

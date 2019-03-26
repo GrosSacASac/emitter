@@ -128,13 +128,24 @@ EventEmitter3.prototype.hasListeners = function(eventName) {
 };
 
 /**
- * Returns an array of events for which the emitter has registered listeners
+ * Returns an array of event names for which the emitter has registered listeners
  *
  * @return {Array <String || Symbol>}
  * @api public
  */
 EventEmitter3.prototype.eventNames = function() {
   return Reflect.ownKeys(this._callbacks);
+}
+
+/**
+ * Returns an array of event anmes of type string
+ * for which the emitter has registered listeners
+ *
+ * @return {Array <String>}
+ * @api public
+ */
+EventEmitter3.prototype.eventNamesStrings = function() {
+  return Object.keys(this._callbacks);
 }
 
 export default EventEmitter3;

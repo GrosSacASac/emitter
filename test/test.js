@@ -40,9 +40,23 @@ test('Prototype inheritance using class syntax with super', t => {
 test('Symbols or Stings for eventName, Symbols should be returned by eventNames', t => {
     const emitter = new Emitter();
     const s = Symbol();
+    const s2 = "event"
     emitter.on(s, () => {});
+    emitter.on(s2, () => {});
 
-    t.is(emitter.eventNames()[0], s);
+    t.is(emitter.eventNames().includes(s), true);
+    t.is(emitter.eventNames().includes(s2), true);
+})
+
+test('Stings only for eventNamesStrings, Symbols should be returned by eventNames', t => {
+  const emitter = new Emitter();
+  const s = Symbol();
+  const s2 = "event"
+  emitter.on(s, () => {});
+  emitter.on(s2, () => {});
+
+  t.is(emitter.eventNamesStrings().includes(s), false);
+  t.is(emitter.eventNamesStrings().includes(s2), true);
 })
 
 test('Symbols should be taken into account', t => {

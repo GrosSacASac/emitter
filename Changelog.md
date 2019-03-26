@@ -1,5 +1,9 @@
 # Changelog
 
+## 7.5.0
+
+ * add method eventNamesStrings
+
 ## 7.4.0
 
  * add RegularListener
