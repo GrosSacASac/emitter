@@ -8,6 +8,7 @@
     "esm": "^3.2.22",
     "rollup": "^1.10.1"
   },
+  "type": "module",
   "module": "EventEmitter3.mjs",
   "main": "built/EventEmitter3.js",
   "scripts": {
