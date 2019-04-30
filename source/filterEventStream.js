@@ -1,4 +1,4 @@
-export {filterEventStream};
+export { filterEventStream };
 
 const filterEventStream = (emitter, sourceEventName, filteredEventName, filter) => {
     const filterEventStreamFunction = (x) => {

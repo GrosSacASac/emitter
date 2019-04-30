@@ -1,5 +1,5 @@
-export {EmitterListenerPlus, onFirstSubscribe, onLastUnsubscribe, onSubscribe, onUnsubscribe};
-import {EmitterListener, onSubscribe, onUnsubscribe} from "./EmitterListener.js";
+export { EmitterListenerPlus, onFirstSubscribe, onLastUnsubscribe, onSubscribe, onUnsubscribe };
+import { EmitterListener, onSubscribe, onUnsubscribe } from "./EmitterListener.js";
 
 
 const onFirstSubscribe = Symbol();

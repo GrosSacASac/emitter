@@ -4,10 +4,9 @@
  * or as a base class for extend
  * cannot be used as a mixin for a constructor's prototype
  */
-
 function EventEmitter3(obj) {
-  (obj || this)._callbacks = Object.create(null);
-  if (obj) return Object.assign(obj, EventEmitter3.prototype);
+    (obj || this)._callbacks = Object.create(null);
+    if (obj) return Object.assign(obj, EventEmitter3.prototype);
 };
 
 /**
@@ -18,9 +17,9 @@ function EventEmitter3(obj) {
  * @api public
  */
 
-EventEmitter3.prototype.on = function(eventName, fn) {
-  (this._callbacks[eventName] = this._callbacks[eventName] || [])
-    .push(fn);
+EventEmitter3.prototype.on = function (eventName, fn) {
+    (this._callbacks[eventName] = this._callbacks[eventName] || [])
+        .push(fn);
 };
 
 /**
@@ -31,14 +30,14 @@ EventEmitter3.prototype.on = function(eventName, fn) {
  * @api public
  */
 
-EventEmitter3.prototype.once = function(eventName, fn) {
-  const once = (data) => {
-    this.off(eventName, once);
-    fn(data);
-  };
+EventEmitter3.prototype.once = function (eventName, fn) {
+    const once = (data) => {
+        this.off(eventName, once);
+        fn(data);
+    };
 
-  once.fn = fn; // makes it possible to remove with off
-  this.on(eventName, once);
+    once.fn = fn; // makes it possible to remove with off
+    this.on(eventName, once);
 };
 
 /**
@@ -51,38 +50,38 @@ EventEmitter3.prototype.once = function(eventName, fn) {
  * @api public
  */
 
-EventEmitter3.prototype.off = function(eventName, fn) {
-  // all
-  if (!eventName) {
-    this._callbacks = Object.create(null);
-    return;
-  }
+EventEmitter3.prototype.off = function (eventName, fn) {
+    // all
+    if (!eventName) {
+        this._callbacks = Object.create(null);
+        return;
+    }
 
-  // specific event
-  const callbacks = this._callbacks[eventName];
-  if (!callbacks) {
-      return;
-  }
+    // specific event
+    const callbacks = this._callbacks[eventName];
+    if (!callbacks) {
+        return;
+    }
 
-  // remove all handlers
-  if (!fn) {
-    delete this._callbacks[eventName];
-    return;
-  }
+    // remove all handlers
+    if (!fn) {
+        delete this._callbacks[eventName];
+        return;
+    }
 
-  // remove specific handler
-  const index = callbacks.findIndex(function (cb) {
-      return (cb === fn || cb.fn === fn)
-  });
-  if (index > -1) {
-      callbacks.splice(index, 1);
-  }
+    // remove specific handler
+    const index = callbacks.findIndex(function (cb) {
+        return (cb === fn || cb.fn === fn)
+    });
+    if (index > -1) {
+        callbacks.splice(index, 1);
+    }
 
-  // Remove event specific arrays for the eventName type that no
-  // one is subscribed for, to avoid memory leak.
-  if (callbacks.length === 0) {
-    delete this._callbacks[eventName];
-  }
+    // Remove event specific arrays for the eventName type that no
+    // one is subscribed for, to avoid memory leak.
+    if (callbacks.length === 0) {
+        delete this._callbacks[eventName];
+    }
 };
 
 /**
@@ -92,15 +91,15 @@ EventEmitter3.prototype.off = function(eventName, fn) {
  * @param {any} data
  */
 
-EventEmitter3.prototype.emit = function(eventName, data) {
-  const callbacks = this._callbacks[eventName];
-  if (!callbacks) {
-      return;
-  }
-  const frozenCallbacks = Array.from(callbacks);
-  frozenCallbacks.forEach(callback => {
-      callback(data);
-  });
+EventEmitter3.prototype.emit = function (eventName, data) {
+    const callbacks = this._callbacks[eventName];
+    if (!callbacks) {
+        return;
+    }
+    const frozenCallbacks = Array.from(callbacks);
+    frozenCallbacks.forEach(callback => {
+        callback(data);
+    });
 };
 
 /**
@@ -111,8 +110,8 @@ EventEmitter3.prototype.emit = function(eventName, data) {
  * @api public
  */
 
-EventEmitter3.prototype.listeners = function(eventName) {
-  return this._callbacks[eventName] || [];
+EventEmitter3.prototype.listeners = function (eventName) {
+    return this._callbacks[eventName] || [];
 };
 
 /**
@@ -123,8 +122,8 @@ EventEmitter3.prototype.listeners = function(eventName) {
  * @api public
  */
 
-EventEmitter3.prototype.hasListeners = function(eventName) {
-  return Boolean(this.listeners(eventName).length);
+EventEmitter3.prototype.hasListeners = function (eventName) {
+    return Boolean(this.listeners(eventName).length);
 };
 
 /**
@@ -133,8 +132,8 @@ EventEmitter3.prototype.hasListeners = function(eventName) {
  * @return {Array <String || Symbol>}
  * @api public
  */
-EventEmitter3.prototype.eventNames = function() {
-  return Reflect.ownKeys(this._callbacks);
+EventEmitter3.prototype.eventNames = function () {
+    return Reflect.ownKeys(this._callbacks);
 }
 
 /**
@@ -144,8 +143,8 @@ EventEmitter3.prototype.eventNames = function() {
  * @return {Array <String>}
  * @api public
  */
-EventEmitter3.prototype.eventNamesStrings = function() {
-  return Object.keys(this._callbacks);
+EventEmitter3.prototype.eventNamesStrings = function () {
+    return Object.keys(this._callbacks);
 }
 
 export default EventEmitter3;

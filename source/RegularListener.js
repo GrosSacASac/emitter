@@ -7,9 +7,10 @@ export {
     onSubscribe,
     onUnsubscribe
 };
-import {EmitterListenerPlus, onFirstSubscribe, onLastUnsubscribe, onSubscribe, onUnsubscribe} from "./EmitterListenerPlus.js";
-import {isString} from "./isString.js";
-import {filterEventStream} from "./filterEventStream.js";
+import { EmitterListenerPlus, onFirstSubscribe, onLastUnsubscribe, onSubscribe, onUnsubscribe } from "./EmitterListenerPlus.js";
+import { isString } from "./isString.js";
+import { filterEventStream } from "./filterEventStream.js";
+
 
 const onFirstSubscribeString = Symbol();
 const onLastUnsubscribeString = Symbol();
