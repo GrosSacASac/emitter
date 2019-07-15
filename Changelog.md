@@ -1,5 +1,9 @@
 # Changelog
 
+## 8.0.0
+
+Rename file into event-e3.js
+
 ## 7.5.0
 
  * add method eventNamesStrings

@@ -1,5 +1,5 @@
 export { EmitterListener, onSubscribe, onUnsubscribe };
-import Emitter from "../EventEmitter3.mjs";
+import Emitter from "../event-e3.js";
 
 
 const onSubscribe = Symbol();

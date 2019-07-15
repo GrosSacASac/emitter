@@ -2,7 +2,7 @@
  could also be using EmitterListener.js */
 
 export { weatherForecastEvent, acitveDataProvider };
-import Emitter from "../EventEmitter3.mjs";
+import Emitter from "../event-e3.js";
 
 const weatherForecastEvent = Symbol();
 const acitveDataProvider = Emitter({});

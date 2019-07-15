@@ -9,14 +9,12 @@ Event Emitter 3
 ## import
 
 ```js
-// rollup webpack typescript
+// rollup webpack typescript, node12+
 import Emitter from "event-e3";
-// node 12+ with --experimental-modules
-import Emitter from "event-e3/EventEmitter3.mjs";
 // raw import
-import Emitter from "./node_modules/event-e3/EventEmitter3.mjs";
+import Emitter from "./node_modules/event-e3/event-e3.js";
 // with require()
-const Emitter = require("event-e3");
+const Emitter = require("event-e3/built/event-e3.js");
 ```
 
 ## API

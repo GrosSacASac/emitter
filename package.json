@@ -1,19 +1,18 @@
 {
   "name": "event-e3",
   "description": "Universal light Event Emitter",
-  "version": "7.6.0",
+  "version": "8.0.0",
+  "type": "module",
+  "main": "event-e3.js",
   "license": "MIT",
   "devDependencies": {
     "ava": "^1.4.1",
     "esm": "^3.2.22",
     "rollup": "^1.10.1"
   },
-  "type": "module",
-  "module": "EventEmitter3.mjs",
-  "main": "built/EventEmitter3.js",
   "scripts": {
     "test": "ava",
-    "rollup": "rollup EventEmitter3.mjs --format umd --name Emitter --file built/EventEmitter3.js",
+    "rollup": "rollup event-e3.js --format umd --name Emitter --file built/event-e3",
     "prepublishOnly": "npm run rollup"
   },
   "ava": {
@@ -52,7 +51,7 @@
     "3"
   ],
   "files": [
-    "EventEmitter3.mjs",
+    "event-e3.js",
     "built",
     "Changelog.md",
     "LICENSE",
