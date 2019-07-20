@@ -13,7 +13,7 @@
   "scripts": {
     "test": "ava",
     "bundle": "rollup event-e3.js --format umd --name Emitter --file built/event-e3.js",
-    "prepublishOnly": "npm run rollup"
+    "prepublishOnly": "npm run bundle"
   },
   "ava": {
     "require": [
