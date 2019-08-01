@@ -74,13 +74,13 @@ EventEmitter3.prototype.off = function (eventName, fn) {
         return (cb === fn || cb.fn === fn)
     });
     if (index > -1) {
-        callbacks.splice(index, 1);
-    }
-
-    // Remove event specific arrays for the eventName type that no
-    // one is subscribed for, to avoid memory leak.
-    if (callbacks.length === 0) {
-        delete this._callbacks[eventName];
+        // Remove event specific arrays for the eventName type that no
+        // one is subscribed for, to avoid memory leak.
+        if (callbacks.length === 1) {
+            delete this._callbacks[eventName];
+        } else {
+            callbacks.splice(index, 1);
+        }
     }
 };
 
