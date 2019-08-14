@@ -1,44 +1,13 @@
-export { runEventE3BaslineTests };
+export {
+    runEventE3BaslineTests,
+    asPrototypeMixin,
+    asObjectDecorator,
+    inheritance,
+};
 import test from "ava";
 
-const runEventE3BaslineTests = (implementation) => {
-    const Emitter = implementation;
-    test(`Prototype inheritance with .prototype and .call syntax`, t => {
-        let run = false
-        function Custom() {
-            Emitter.call(this)
-        }
 
-        Object.setPrototypeOf(Custom.prototype, Emitter.prototype);
-
-        var emitter = new Custom();
-
-        emitter.on(`foo`, () => {
-            run = true
-        });
-        emitter.emit(`foo`);
-
-        t.is(run, true);
-    });
-
-
-    test(`Prototype inheritance using class syntax with super`, t => {
-        let run = false
-        class CustomE extends Emitter {
-            constructor() {
-                super()
-            }
-        }
-
-        var emitter = new CustomE();
-        emitter.on(`foo`, () => {
-            run = true
-        });
-        emitter.emit(`foo`);
-
-        t.is(run, true);
-    })
-
+const runEventE3BaslineTests = (Emitter) => {
     test(`Symbols or Stings for eventName, Symbols should be returned by eventNames`, t => {
         const emitter = new Emitter();
         const s = Symbol();
@@ -69,11 +38,9 @@ const runEventE3BaslineTests = (implementation) => {
         t.is(emitter.hasListeners(s), true);
     })
 
-
-
     test(`Emitter.on(event, fn) should add listeners`, t => {
-        var emitter = new Emitter();
-        var calls = [];
+        const emitter = new Emitter();
+        const calls = [];
 
         emitter.on(`foo`, function (val) {
             calls.push(`one`, val);
@@ -91,9 +58,9 @@ const runEventE3BaslineTests = (implementation) => {
     })
 
     test(`should also work with symbols`, t => {
-        var eventName = Symbol()
-        var emitter = new Emitter();
-        var calls = [];
+        const eventName = Symbol()
+        const emitter = new Emitter();
+        const calls = [];
 
         emitter.on(eventName, function (val) {
             calls.push(`one`, val);
@@ -105,8 +72,8 @@ const runEventE3BaslineTests = (implementation) => {
     })
 
     test(`should add listeners for events which are same names with methods of Object.prototype`, t => {
-        var emitter = new Emitter();
-        var calls = [];
+        const emitter = new Emitter();
+        const calls = [];
 
         emitter.on(`constructor`, function (val) {
             calls.push(`one`, val);
@@ -120,13 +87,11 @@ const runEventE3BaslineTests = (implementation) => {
         emitter.emit(`__proto__`, 2);
 
         t.deepEqual(calls, [`one`, 1, `two`, 2]);
-    })
-
-
+    });
 
     test(`.once(event, fn) should add a single-shot listener`, t => {
-        var emitter = new Emitter();
-        var calls = [];
+        const emitter = new Emitter();
+        const calls = [];
 
         emitter.once(`foo`, function (val) {
             calls.push(`one`, val);
@@ -138,13 +103,11 @@ const runEventE3BaslineTests = (implementation) => {
         emitter.emit(`bar`, 1);
 
         t.deepEqual(calls, [`one`, 1]);
-    })
-
-
+    });
 
     test(`.off(event, fn) should remove a listener`, t => {
-        var emitter = new Emitter();
-        var calls = [];
+        const emitter = new Emitter();
+        const calls = [];
 
         function one() { calls.push(`one`); }
         function two() { calls.push(`two`); }
@@ -156,11 +119,11 @@ const runEventE3BaslineTests = (implementation) => {
         emitter.emit(`foo`);
 
         t.deepEqual(calls, [`one`]);
-    })
+    });
 
     test(`should work with .once()`, t => {
-        var emitter = new Emitter();
-        var calls = [];
+        const emitter = new Emitter();
+        const calls = [];
 
         function one() { calls.push(`one`); }
 
@@ -171,11 +134,12 @@ const runEventE3BaslineTests = (implementation) => {
         emitter.emit(`foo`);
 
         t.deepEqual(calls, []);
-    })
+    });
 
     test(`should work when called from an event`, t => {
-        var emitter = new Emitter()
-            , called
+        const emitter = new Emitter();
+        let called = false;
+
         function b() {
             called = true;
         }
@@ -191,11 +155,9 @@ const runEventE3BaslineTests = (implementation) => {
         t.is(called, false);
     });
 
-
-
     test(`.off(event) should remove all listeners for an event`, t => {
-        var emitter = new Emitter();
-        var calls = [];
+        const emitter = new Emitter();
+        const calls = [];
 
         function one() { calls.push(`one`); }
         function two() { calls.push(`two`); }
@@ -208,10 +170,10 @@ const runEventE3BaslineTests = (implementation) => {
         emitter.emit(`foo`);
 
         t.deepEqual(calls, []);
-    })
+    });
 
     test(`should remove event array to avoid memory leak`, t => {
-        var emitter = new Emitter();
+        const emitter = new Emitter();
 
         function cb() { }
 
@@ -220,10 +182,10 @@ const runEventE3BaslineTests = (implementation) => {
 
 
         t.is(emitter.hasListeners(`foo`), false);
-    })
+    });
 
     test(`should only remove the event array when the last subscriber unsubscribes`, t => {
-        var emitter = new Emitter();
+        const emitter = new Emitter();
 
         function cb1() { }
         function cb2() { }
@@ -233,12 +195,11 @@ const runEventE3BaslineTests = (implementation) => {
         emitter.off(`foo`, cb1);
 
         t.is(emitter.hasListeners(`foo`), true);
-    })
-
+    });
 
     test(`.off() should remove all listeners`, t => {
-        var emitter = new Emitter();
-        var calls = [];
+        const emitter = new Emitter();
+        const calls = [];
 
         function one() { calls.push(`one`); }
         function two() { calls.push(`two`); }
@@ -255,43 +216,77 @@ const runEventE3BaslineTests = (implementation) => {
         emitter.emit(`bar`);
 
         t.deepEqual(calls, [`one`, `two`])
-    })
-
-
+    });
 
     test(`.listeners(event) when handlers are present should return an array of callbacks`, t => {
-        var emitter = new Emitter();
+        const emitter = new Emitter();
         function foo() { }
         emitter.on(`foo`, foo);
         t.deepEqual(emitter.listeners(`foo`), [foo]);
-    })
+    });
 
-
-
-    test(` when no handlers are present should return an empty array`, t => {
-        var emitter = new Emitter();
+    test(`when no handlers are present should return an empty array`, t => {
+        const emitter = new Emitter();
         t.deepEqual(emitter.listeners(`foo`), []);
-    })
-
+    });
 
     test(`.hasListeners(event) when handlers are present should return true`, t => {
-        var emitter = new Emitter();
+        const emitter = new Emitter();
         emitter.on(`foo`, function () { });
         t.is(emitter.hasListeners(`foo`), true);
-    })
-
-
+    });
 
     test(`when no handlers are present should return false`, t => {
-        var emitter = new Emitter();
+        const emitter = new Emitter();
         t.is(emitter.hasListeners(`foo`), false);
+    });
+};
+
+const inheritance = (Emitter) => {
+    test(`Prototype inheritance with .prototype`, t => {
+        let run = false;
+        function Custom() {
+            const emitter = new Emitter();
+            // customize here
+            return emitter;
+        }
+
+        Object.setPrototypeOf(Custom.prototype, Emitter.prototype);
+
+        const emitter = new Custom();
+
+        emitter.on(`foo`, () => {
+            run = true;
+        });
+        emitter.emit(`foo`);
+
+        t.is(run, true);
+    });
+
+
+    test(`Prototype inheritance using class syntax with super`, t => {
+        let run = false
+        class CustomE extends Emitter {
+            constructor() {
+                super()
+            }
+        }
+
+        const emitter = new CustomE();
+        emitter.on(`foo`, () => {
+            run = true
+        });
+        emitter.emit(`foo`);
+
+        t.is(run, true);
     })
+};
 
+const asObjectDecorator = (Emitter) => {
+    test(`Emitter(obj) should decorate`, t => {
+        const calls = [];
 
-    test(`Emitter(obj) should mixin`, t => {
-        var calls = [];
-
-        var proto = {};
+        const proto = {};
         Emitter(proto);
         proto.on(`something`, function () {
             calls.push(7);
@@ -301,26 +296,28 @@ const runEventE3BaslineTests = (implementation) => {
         t.deepEqual(calls, [7]);
     })
 
+};
 
-    test(`prototype mixin is available in this version https://github.com/GrosSacASac/emitter/releases/tag/1.3.7 should work on instances`, t => {
-        var User = function (name, age = 18) {
+const asPrototypeMixin = (Emitter) => {
+    test(`prototype mixin should work on instances`, t => {
+        const User = function (name, age = 18) {
             this.age = age;
-            // this.name = name;
         };
         Emitter(User.prototype);
 
         const julie = new User(`Julie`);
 
         julie.on(`birthday`, function () {
-            julie.age++;
+            julie.age += 1;
         });
+
         julie.emit(`birthday`);
 
         t.is(julie.age, 19);
     })
 
     test(`should work separately on many instances`, t => {
-        var User = function (name, age = 18) {
+        const User = function (name, age = 18) {
             this.age = age;
         };
         Emitter(User.prototype);
@@ -329,38 +326,41 @@ const runEventE3BaslineTests = (implementation) => {
         const moritz = new User(`Moritz`);
 
         julie.on(`birthday`, function () {
-            julie.age++;
+            julie.age += 1;
         });
         moritz.on(`birthday`, function () {
-            moritz.age++;
+            moritz.age += 1;
         });
+
         julie.emit(`birthday`);
 
         t.is(julie.age, 19);
-        t.is(moritz.age, 19, `test was not the birthday of Moritz`);
-    })
+        t.is(moritz.age, 18, `was not the birthday of Moritz`);
+    });
 
     test(`should work separately on instance and constructor`, t => {
-        var User = function (name, age = 18) {
+        const User = function (name, age = 18) {
             this.age = age;
         };
         Emitter(User.prototype);
-        var age = 1000;
+
+        let age = 1000;
         const julie = new User(`Julie`);
 
         julie.on(`birthday`, function () {
-            julie.age++;
+            julie.age += 1;
         });
         User.prototype.on(`birthday`, function () {
-            age++;
+            age += 1;
         });
+
         User.prototype.emit(`birthday`);
 
-        t.is(julie.age, 19);
+        t.is(julie.age, 18);
         t.is(age, 1001);
 
         julie.emit(`birthday`);
-        t.is(julie.age, 20);
-        t.is(age, 1002);
-    })
-}
+        t.is(julie.age, 19);
+        t.is(age, 1001);
+    });
+};

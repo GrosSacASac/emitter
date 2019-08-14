@@ -3,6 +3,7 @@
  * or as a decorator for an existing object
  * or as a base class for extend
  * cannot be used as a mixin for a constructor's prototype
+ * without calling the constructor
  */
 function EventEmitter3(obj) {
     (obj || this)._callbacks = Object.create(null);
