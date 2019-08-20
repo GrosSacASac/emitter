@@ -1,7 +1,7 @@
 {
   "name": "event-e3",
   "description": "Universal light Event Emitter",
-  "version": "8.0.3",
+  "version": "8.0.4",
   "type": "module",
   "main": "event-e3.js",
   "license": "MIT",

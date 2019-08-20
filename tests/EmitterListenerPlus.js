@@ -5,10 +5,10 @@ import {
     inheritance,
 } from "./runEventE3BaslineTests.js";
 import test from "ava";
-import { EmitterListener } from "../source/EmitterListener.js";
+import { EmitterListenerPlus } from "../source/EmitterListenerPlus.js";
 
-runEventE3BaslineTests(EmitterListener);
+runEventE3BaslineTests(EmitterListenerPlus);
 // asObjectDecorator(EmitterListener); // only with new
-inheritance(EmitterListener);
+inheritance(EmitterListenerPlus);
 
 // todo add here specific tests for this variant
