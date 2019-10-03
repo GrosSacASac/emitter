@@ -7,13 +7,17 @@
   "license": "MIT",
   "devDependencies": {
     "ava": "^2.2.0",
+    "eslint": "^6.5.1",
+    "eslint-config-red": "^1.4.1",
     "esm": "^3.2.25",
     "rollup": "^1.17.0"
   },
   "scripts": {
     "test": "ava",
     "bundle": "rollup event-e3.js --format umd --name Emitter --file built/event-e3.js",
-    "prepublishOnly": "npm run bundle"
+    "prepublishOnly": "npm run bundle",
+    "lint-fix": "eslint --ignore-path .gitignore source --fix event-e3.js",
+    "lint": "eslint --ignore-path .gitignore source event-e3.js"
   },
   "ava": {
     "require": [
@@ -60,5 +64,20 @@
   "repository": {
     "type": "git",
     "url": "git://github.com/GrosSacASac/event-e3.git"
+  },
+  "eslintConfig": {
+    "extends": [
+      "red"
+    ],
+    "parserOptions": {
+      "ecmaVersion": 2020,
+      "sourceType": "module",
+      "ecmaFeatures": {}
+    },
+    "env": {
+      "es6": true,
+      "browser": true
+    },
+    "rules": {}
   }
 }
