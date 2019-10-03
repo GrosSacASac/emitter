@@ -16,8 +16,8 @@
     "test": "ava",
     "bundle": "rollup event-e3.js --format umd --name Emitter --file built/event-e3.js",
     "prepublishOnly": "npm run bundle",
-    "lint-fix": "eslint --ignore-path .gitignore --fix source",
-    "lint": "eslint --ignore-path .gitignore source"
+    "lint-fix": "eslint --ignore-path .gitignore source event-e3.js",
+    "lint": "eslint --ignore-path .gitignore source event-e3.js"
   },
   "ava": {
     "require": [
