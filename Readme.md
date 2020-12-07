@@ -124,6 +124,17 @@ earthQuakeEmitter.on('BigEarthQuake', newsAggregator.publishNews);
 earthQuakeEmitter.on('BigEarthQuake', humanHelpWithoutBorders.organize);
 ```
 
+## Comparison with NodeJs Event Emitter
+
+ - `this` is undefined inside the event handler
+ - error events do not trigger any special logic
+ - no captureRejections 
+ - no maxListener
+ - `.emit` can only emit 1 thing (use array or object for more)
+ - no prepend
+ - no method aliases
+ - no dependencies
+
 ## Tests
 
 `npm t`
