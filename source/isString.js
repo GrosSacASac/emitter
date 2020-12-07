@@ -1,5 +1,5 @@
 export { isString };
 
 const isString = (x) => {
-    return typeof x === 'string';
+    return typeof x === `string`;
 };

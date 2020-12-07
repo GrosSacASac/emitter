@@ -5,7 +5,7 @@ export {
     onFirstSubscribe,
     onLastUnsubscribe,
     onSubscribe,
-    onUnsubscribe
+    onUnsubscribe,
 };
 import { EmitterListenerPlus, onFirstSubscribe, onLastUnsubscribe, onSubscribe, onUnsubscribe } from "./EmitterListenerPlus.js";
 import { isString } from "./isString.js";
@@ -17,7 +17,7 @@ const onLastUnsubscribeString = Symbol();
 
 const RegularListener = class extends EmitterListenerPlus {
     constructor() {
-        super()
+        super();
         filterEventStream(this, onFirstSubscribe, onFirstSubscribeString, isString);
         filterEventStream(this, onLastUnsubscribe, onLastUnsubscribeString, isString);
     }

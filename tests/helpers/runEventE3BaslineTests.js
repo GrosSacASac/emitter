@@ -11,24 +11,24 @@ const runEventE3BaslineTests = (Emitter) => {
     test(`Symbols or Stings for eventName, Symbols should be returned by eventNames`, t => {
         const emitter = new Emitter();
         const s = Symbol();
-        const s2 = "event"
+        const s2 = `event`;
         emitter.on(s, () => { });
         emitter.on(s2, () => { });
 
         t.is(emitter.eventNames().includes(s), true);
         t.is(emitter.eventNames().includes(s2), true);
-    })
+    });
 
     test(`Stings only for eventNamesStrings, Symbols should be returned by eventNames`, t => {
         const emitter = new Emitter();
         const s = Symbol();
-        const s2 = "event"
+        const s2 = `event`;
         emitter.on(s, () => { });
         emitter.on(s2, () => { });
 
         t.is(emitter.eventNamesStrings().includes(s), false);
         t.is(emitter.eventNamesStrings().includes(s2), true);
-    })
+    });
 
     test(`Symbols should be taken into account`, t => {
         const emitter = new Emitter();
@@ -36,7 +36,7 @@ const runEventE3BaslineTests = (Emitter) => {
         emitter.on(s, () => { });
 
         t.is(emitter.hasListeners(s), true);
-    })
+    });
 
     test(`Emitter.on(event, fn) should add listeners`, t => {
         const emitter = new Emitter();
@@ -55,10 +55,10 @@ const runEventE3BaslineTests = (Emitter) => {
         emitter.emit(`foo`, 2);
 
         t.deepEqual(calls, [`one`, 1, `two`, 1, `one`, 2, `two`, 2]);
-    })
+    });
 
     test(`should also work with symbols`, t => {
-        const eventName = Symbol()
+        const eventName = Symbol();
         const emitter = new Emitter();
         const calls = [];
 
@@ -69,7 +69,7 @@ const runEventE3BaslineTests = (Emitter) => {
         emitter.emit(eventName, 1);
 
         t.deepEqual(calls, [`one`, 1]);
-    })
+    });
 
     test(`should add listeners for events which are same names with methods of Object.prototype`, t => {
         const emitter = new Emitter();
@@ -215,7 +215,7 @@ const runEventE3BaslineTests = (Emitter) => {
         emitter.emit(`foo`);
         emitter.emit(`bar`);
 
-        t.deepEqual(calls, [`one`, `two`])
+        t.deepEqual(calls, [`one`, `two`]);
     });
 
     test(`.listeners(event) when handlers are present should return an array of callbacks`, t => {
@@ -265,21 +265,21 @@ const inheritance = (Emitter) => {
 
 
     test(`Prototype inheritance using class syntax with super`, t => {
-        let run = false
+        let run = false;
         class CustomE extends Emitter {
             constructor() {
-                super()
+                super();
             }
         }
 
         const emitter = new CustomE();
         emitter.on(`foo`, () => {
-            run = true
+            run = true;
         });
         emitter.emit(`foo`);
 
         t.is(run, true);
-    })
+    });
 };
 
 const asObjectDecorator = (Emitter) => {
@@ -294,7 +294,7 @@ const asObjectDecorator = (Emitter) => {
         proto.emit(`something`);
 
         t.deepEqual(calls, [7]);
-    })
+    });
 
 };
 
@@ -314,7 +314,7 @@ const asPrototypeMixin = (Emitter) => {
         julie.emit(`birthday`);
 
         t.is(julie.age, 19);
-    })
+    });
 
     test(`should work separately on many instances`, t => {
         const User = function (name, age = 18) {

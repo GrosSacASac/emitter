@@ -22,7 +22,7 @@ const EmitterListener = class extends Emitter {
             listeners.forEach(listener => {
                 this.emit(onUnsubscribe, {
                     eventName: listener,
-                    functionName: listener.name
+                    functionName: listener.name,
                 });
             });
         } // else no chance to observe

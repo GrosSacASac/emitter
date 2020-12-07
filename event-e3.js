@@ -7,8 +7,8 @@
  */
 function EventEmitter3(obj) {
     (obj || this)._callbacks = Object.create(null);
-    if (obj) return Object.assign(obj, EventEmitter3.prototype);
-};
+    if (obj) {return Object.assign(obj, EventEmitter3.prototype);}
+}
 
 /**
  * Listen on the given `eventName` with `fn`
@@ -72,7 +72,7 @@ EventEmitter3.prototype.off = function (eventName, fn) {
 
     // remove specific handler
     const index = callbacks.findIndex(function (cb) {
-        return (cb === fn || cb.fn === fn)
+        return (cb === fn || cb.fn === fn);
     });
     if (index > -1) {
         // Remove event specific arrays for the eventName type that no
@@ -135,7 +135,7 @@ EventEmitter3.prototype.hasListeners = function (eventName) {
  */
 EventEmitter3.prototype.eventNames = function () {
     return Reflect.ownKeys(this._callbacks);
-}
+};
 
 /**
  * Returns an array of event anmes of type string
@@ -146,6 +146,6 @@ EventEmitter3.prototype.eventNames = function () {
  */
 EventEmitter3.prototype.eventNamesStrings = function () {
     return Object.keys(this._callbacks);
-}
+};
 
 export default EventEmitter3;
