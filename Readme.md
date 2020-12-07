@@ -9,6 +9,8 @@ Event Emitter 3
 ## import
 
 ```js
+// Deno
+import Emitter from 'https://unpkg.com/event-e3/event-e3.js'
 // rollup webpack typescript, node12+
 import Emitter from "event-e3";
 // raw import

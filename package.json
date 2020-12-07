@@ -1,6 +1,6 @@
 {
   "name": "event-e3",
-  "version": "8.0.6",
+  "version": "8.0.7",
   "description": "Universal light Event Emitter",
   "license": "MIT",
   "type": "module",
