@@ -1,6 +1,6 @@
 {
   "name": "event-e3",
-  "version": "8.0.5",
+  "version": "8.0.6",
   "description": "Universal light Event Emitter",
   "license": "MIT",
   "type": "module",
@@ -13,71 +13,60 @@
     "lint": "eslint --ignore-path .gitignore source event-e3.js"
   },
   "devDependencies": {
-    "ava": "^2.2.0",
+    "ava": "^3.14.0",
     "eslint": "^6.5.1",
     "eslint-config-red": "^1.4.1",
     "esm": "^3.2.25",
     "rollup": "^1.17.0"
   },
   "ava": {
-    "require": [
-      "esm"
-    ],
-    "babel": {
-      "testOptions": {
-        "presets": [
-          [
-            "module:ava/stage-4",
-            {
-              "modules": false
-            }
-          ]
-        ]
-      }
-    },
-    "compileEnhancements": false
-    },
-    "eslintConfig": {
+		"files": [
+			"tests/*.js"
+		],
+    "failFast": true,
+    "failWithoutAssertions": false
+  },
+  "eslintConfig": {
     "extends": [
-        "red"
+      "red"
     ],
     "parserOptions": {
-        "ecmaVersion": 2020,
-        "sourceType": "module",
-        "ecmaFeatures": {}
+      "ecmaVersion": 2020,
+      "sourceType": "module",
+      "ecmaFeatures": {}
     },
     "env": {
-        "es6": true,
-        "browser": true
+      "es6": true,
+      "browser": true
     },
     "rules": {}
-    },
-    "files": [
-        "event-e3.js",
-        "built",
-        "Changelog.md",
-        "LICENSE",
-        "source"
-    ],
-    "repository": {
-        "type": "git",
-        "url": "git://github.com/GrosSacASac/event-e3.git"
-    },
-    "keywords": [
-        "browser",
-        "node.js",
-        "universal",
-        "publish",
-        "subscribe",
-        "listen",
-        "message",
-        "sender",
-        "receiver",
-        "observer",
-        "push",
-        "distribution",
-        "event",
-        "emitter",
-        "3"
-    ]
+  },
+  "files": [
+    "event-e3.js",
+    "built",
+    "Changelog.md",
+    "LICENSE",
+    "source"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/GrosSacASac/event-e3.git"
+  },
+  "keywords": [
+    "browser",
+    "node.js",
+    "universal",
+    "publish",
+    "subscribe",
+    "listen",
+    "message",
+    "sender",
+    "receiver",
+    "observer",
+    "push",
+    "distribution",
+    "event",
+    "emitter",
+    "3"
+  ]
 }

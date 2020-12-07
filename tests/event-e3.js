@@ -3,7 +3,7 @@ import {
     asPrototypeMixin,
     asObjectDecorator,
     inheritance,
-} from "./runEventE3BaslineTests.js";
+} from "./helpers/runEventE3BaslineTests.js";
 import Emitter from "../event-e3.js";
 
 runEventE3BaslineTests(Emitter);

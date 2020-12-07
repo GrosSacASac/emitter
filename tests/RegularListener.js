@@ -3,7 +3,7 @@ import {
     asPrototypeMixin,
     asObjectDecorator,
     inheritance,
-} from "./runEventE3BaslineTests.js";
+} from "./helpers/runEventE3BaslineTests.js";
 import test from "ava";
 import { RegularListener } from "../source/RegularListener.js";
 
