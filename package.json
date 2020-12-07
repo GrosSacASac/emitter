@@ -17,7 +17,7 @@
     "eslint": "^7.15.0",
     "eslint-config-red": "^1.8.1",
     "esm": "^3.2.25",
-    "rollup": "^1.17.0"
+    "rollup": "^2.34.2"
   },
   "ava": {
     "files": [
