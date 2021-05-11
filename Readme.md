@@ -77,7 +77,7 @@ Same as `.eventNames()` but the array is only Strings.
 
 EmitterListener exposes a way to subscribe to subscriptions and unsubscriptions. It can only be used as a constructor, example usage:
 
-```
+```js
 import {EmitterListener, onSubscribe, onUnsubscribe} from "event-e3/source/EmitterListener.js";
 const x = new EmitterListener(); 
 
@@ -90,7 +90,7 @@ x.on(onUnsubscribe, console.log.bind('console', 'off\'ed'))
 
 EmitterListener further extends EmitterListener. It can be used to direclty listen for the first subscription and last unsubscription for a given event name and  It can only be used as a constructor, example usage:
 
-```
+```js
 import {EmitterListenerPlus, onFirstSubscribe, onLastUnsubscribe, onSubscribe, onUnsubscribe} from "event-e3/source/EmitterListenerPlus.js";
 const x = new EmitterListenerPlus(); 
 
@@ -108,7 +108,7 @@ Makes it convenient to filter an event stream. The new event stream is emitted o
 
 An example use case: An Emitter emits 'Earthquake' for the scientific community. But the general public is interested in big ones only.
 
-```
+```js
 import Emitter from "event-e3";
 import {filterEventStream} from "event-e3/source/filterEventStream.js";
 const earthQuakeEmitter = Emitter({});
